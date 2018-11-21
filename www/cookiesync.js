@@ -17,7 +17,7 @@
 var exec = require('cordova/exec');
 
 module.exports = {
-    injectCookie: function (url, successCallback, errorCallback) {
+    setCookie: function (url, cookieName, cookieValue, successCallback, errorCallback) {
 
         if ((url.substr(0,4)=="http")&&(url.indexOf("\/\/")>=0)) {
           url = url.slice(url.indexOf("\/\/")+2);
@@ -25,7 +25,8 @@ module.exports = {
         var sPos = url.indexOf("\/");
         var domain = url.substr(0,sPos);
         var path = url.substr(sPos,(url.length-sPos));
-
-        exec(successCallback, errorCallback, 'WKWebViewInjectCookie', 'injectCookie', [domain, path]);
+        var cookie_name = cookieName;
+        var cookie_value = cookieValue;
+        exec(successCallback, errorCallback, 'WKWebViewInjectCookie', 'setCookie', [domain, path, cookie_name, cookie_value]);
     }
 };
