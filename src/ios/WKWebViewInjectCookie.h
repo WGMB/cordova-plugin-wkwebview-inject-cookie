@@ -18,7 +18,7 @@
 
 @interface WKWebViewInjectCookie : CDVPlugin
 
-- (void)injectCookie:(CDVInvokedUrlCommand *)command;
+- (void)setCookie:(CDVInvokedUrlCommand *)command;
 
 @property (nonatomic, strong) NSString* callbackId;
 
