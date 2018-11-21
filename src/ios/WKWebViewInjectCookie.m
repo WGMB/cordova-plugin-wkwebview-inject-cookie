@@ -20,18 +20,20 @@
 
 @implementation WKWebViewInjectCookie
 
-- (void)injectCookie:(CDVInvokedUrlCommand *)command {
+- (void)setCookie:(CDVInvokedUrlCommand *)command {
     self.callbackId = command.callbackId;
 
     NSString *domain = command.arguments[0];
     NSString *path = command.arguments[1];
+    NSString *cookie_name = command.arguments[2];
+    NSString *cookie_value = command.arguments[3];
 
     WKWebView* wkWebView = (WKWebView*) self.webView;
 
     if (@available(iOS 11.0, *)) {
         NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
-        [cookieProperties setObject:@"foo" forKey:NSHTTPCookieName];
-        [cookieProperties setObject:@"bar" forKey:NSHTTPCookieValue];
+        [cookieProperties setObject:cookie_name forKey:NSHTTPCookieName];
+        [cookieProperties setObject:cookie_value forKey:NSHTTPCookieValue];
         [cookieProperties setObject:domain forKey:NSHTTPCookieDomain];
         [cookieProperties setObject:domain forKey:NSHTTPCookieOriginURL];
         [cookieProperties setObject:path forKey:NSHTTPCookiePath];
